@@ -50,26 +50,29 @@ class Main {
     double ratio = 0;
     double rounds = 0;
 
-    for (int a = 0; a < 41; a++)
+    for (int a = 0; a < 41; a++) {
       for (int b = 0; b < 41; b++)
       {
         Stats.grendelWins = 0;
         Stats.beowulfWins = 0;
         Stats.totalRounds = 0;
         
-        for (int c = 0; c < 20000; c++)
+        for (int c = 0; c < 10000; c++)
           new Game(a, b).begin();
 
         double diff = Math.abs(1-((double) Stats.beowulfWins / Stats.grendelWins));
 
-        if (diff < Math.abs(1-ratio)) {
+        if (diff < Math.abs(1-ratio) && (double) Stats.totalRounds/10000 > 15) {
           ratio = ((double) Stats.beowulfWins / Stats.grendelWins);
           gre = a;
           beo = b;
           rounds = Stats.totalRounds;
         }
-      } 
+      }
 
-    System.out.println("Grendel: " +gre + "      Beowulf: "   + beo + "     Ratio: " + ratio + "       Rounds: " + rounds/20000);
+      System.out.println((double) (100*a)/40+"%");
+    } 
+
+    System.out.println("Grendel: " +gre + "      Beowulf: "   + beo + "     Ratio: " + ratio + "       Rounds: " + rounds/10000);
   }
 }
